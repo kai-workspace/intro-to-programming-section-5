@@ -5,7 +5,7 @@ const messages = document.getElementsByClassName('message');
 const tooHighMessage = document.getElementById('too-high');
 const tooLowMessage = document.getElementById('too-low');
 const maxGuessesMessage = document.getElementById('max-guesses');
-const numberOfGuessesMessage = document.getElementById('num-of-guesses');
+const numberOfGuessesMessage = document.getElementById('number-of-guesses');
 const correctMessage = document.getElementById('correct');
 
 let targetNumber;
@@ -30,10 +30,8 @@ function checkGuess() {
   hideAllMessages();
 
   if (guess === targetNumber) {
-    if (numberOfGuessesMessage != null) {
-      numberOfGuessesMessage.style.display = '';
-      numberOfGuessesMessage.innerHTML = `You made ${attempts} guesses`;
-    }
+    numberOfGuessesMessage.style.display = '';
+    numberOfGuessesMessage.innerHTML = `You made ${attempts} guesses`;
     correctMessage.style.display = '';
 
     submitButton.disabled = true;
@@ -44,14 +42,12 @@ function checkGuess() {
     if (guess < targetNumber) {
       tooLowMessage.style.display = '';
     } else {
-      tooLowMessage.style.display = '';
+      tooHighMessage.style.display = '';
     }
 
     const remainingAttempts = maxNumberOfAttempts - attempts;
-    if (numberOfGuessesMessage != null) {
-      numberOfGuessesMessage.style.display = '';
-      numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guesses remaining`;
-    }
+    numberOfGuessesMessage.style.display = '';
+    numberOfGuessesMessage.innerHTML = `You guessed ${guess}. <br> ${remainingAttempts} guesses remaining`;
   }
 
   if (attempts == maxNumberOfAttempts) {
@@ -78,12 +74,14 @@ function setup() {
   // Reset number of attempts
   attempts = 0;
 
-  // Enable the input and submit button
-  submitButton.disabeld = false;
-  guessInput.disabled = false;
+
 
   hideAllMessages();
   resetButton.style.display = 'none';
+
+  // Enable the input and submit button
+  submitButton.disabled = false;
+  guessInput.disabled = false;
 }
 
 submitButton.addEventListener('click', checkGuess);
